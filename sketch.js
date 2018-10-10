@@ -56,6 +56,7 @@ var momPlay = true;
 var dadPlay = false;
 var daughterPlay = false;
 var sonPlay = false;
+var search;
 
 const options = {
 lat: 37.6571305,
@@ -84,6 +85,7 @@ function preload(){
   musicMom = loadImage('img/family3.png');
   musicDad = loadImage('img/family4.png');
   myFont = loadFont('assets/Lato/Lato-Light.ttf');
+  search = loadImage('assets/search.png');
 
 
 }
@@ -186,6 +188,10 @@ function draw(){
       page = 7;
     }//pickup Yes
 
+    if (mouseIsPressed && mouseX > btnYNX+205 && mouseX < btnYNX+205+105 && mouseY > btnYNY && mouseY < btnYNY+60){
+      page = 10;
+    }//pickup No
+
 
     //Navigation - pick up/go to school
     if(page == 1){
@@ -234,6 +240,9 @@ function draw(){
 
     } //show the popup1
 
+    if(page == 2){
+
+    }
 
     //Temp Up and down - effect a number
     if(page == 3){
@@ -250,8 +259,6 @@ function draw(){
         fill(heat, 0, ac);
         text(tempSlider.value(), 180, 300);
         ellipse(310, 230, 15, 15);
-        // rect(200, 370, 100, 40, 10);
-        // fill(255);
         textSize(18);
         text(acHeat, 204, 396);
         fill(245);
@@ -404,7 +411,7 @@ function draw(){
         daughterPlay = false;
         sonPlay = false;
 
-      }  else if (mouseIsPressed && mouseX > 120 && mouseX < 190 && mouseY > 320 && mouseY < 390) {
+      } else if (mouseIsPressed && mouseX > 120 && mouseX < 190 && mouseY > 320 && mouseY < 390) {
         play = playlistDaughter;
         momPlay = false;
         dadPlay = false;
@@ -442,7 +449,7 @@ function draw(){
 
 
 
-    //picking child page
+    //yes & picking child page
     if(page == 7){
       image(mapPath, 76, 154);
       //son message
@@ -473,6 +480,43 @@ function draw(){
       fill(0);
       rect(500, 480, 1, 40);
     }//track path
+
+
+
+    //No & Search destination
+    if(page == 10){
+
+      //status bar
+      fill(255);
+      drawingContext.shadowOffsetY = -2;
+      drawingContext.shadowBlur =5;
+      drawingContext.shadowColor = "light gray";
+      rect(0, 450, 800, 100);
+      drawingContext.shadowBlur = 0;
+      drawingContext.shadowOffsetY = 0;
+
+      //send message button
+      stroke(224,224,224);
+      var sendMS = rect(120, 470, 550, 60, 30);
+      noStroke();
+
+      fill(0);
+      textSize(20);
+      text("Search Destination", 148, 510);
+
+      //mic icon
+      image(voicemic, 25, 450);
+
+      //send message button
+      drawingContext.shadowBlur =5;
+      drawingContext.shadowColor = "light gray";
+      fill(255);
+      var searchbtn = rect(700, 470, 60, 60, 30);
+      drawingContext.shadowBlur = 0;
+
+      image(search, 702,472,55,55);
+    }
+
 
     if(mouseIsPressed && mouseX > 140 && mouseX < 140+200 && mouseY > 473 && mouseY < 473+60){
       page = 8;
@@ -529,7 +573,7 @@ function draw(){
       //moms message
       image(msBubble2, 30, 100);
       text("Okay, I will be there", 60, 140);
-      text("in 20minutes.", 60, 175);
+      text("in 20 minutes.", 60, 175);
       //status bar
       fill(255);
       drawingContext.shadowOffsetY = -2;
